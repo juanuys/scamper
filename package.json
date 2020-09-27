@@ -1,6 +1,6 @@
 {
   "name": "scamper",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Randomise SCAMPER in your browser.",
   "main": "index.js",
   "scripts": {
