@@ -98,7 +98,7 @@ div.action {
 span.action {
     background-color: lighten($color: olive, $amount: 15);
     color: darkolivegreen;
-    padding: 8px;
+    padding: 2px;
     margin-right: 8px;
 }
 p.smaller {
@@ -114,9 +114,5 @@ div.colophon h1 {
     font-size: smaller;
     color: darkgray;
     text-decoration: underline;
-}
-div.colophon {
-    position: absolute;
-    bottom: 50px;
 }
 </style>
