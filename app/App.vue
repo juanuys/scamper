@@ -8,11 +8,10 @@
             h1 {{title}} #[span(v-if="altTitle") {{altTitle}} ]
             p(v-html="intro")
             p.guide Guiding question: {{question}}
-            button(v-on:click='showAll = !showAll') Show/Hide all questions for this prompt
-            ul.all(v-if="showAll")
-                li(v-for="q in questions") {{q}}
 
-        span.action Refresh the page for another random SCAMPER.
+        div.action(v-on:click='reload()')
+            span.action &#x21bb; Refresh
+            span the page for another random SCAMPER.
 
         div.colophon
             h1(v-on:click='showColophon = !showColophon') Colophon
@@ -23,19 +22,20 @@
                 p Copyright #[a(href='https://www.interaction-design.org/literature/article/learn-how-to-use-the-best-ideation-methods-scamper') Interaction Design Foundation, Learn How to Use the Best Ideation Methods: SCAMPER]
                 p See also #[a(href='https://www.mindtools.com/pages/article/newCT_02.htm') MindTools SCAMPER]
 
-                p #[a(href='https://github.com/juanuys/scamper') Made] by #[a(href='https://juanuys.com') Juan Uys]
+                p #[a(href='https://github.com/juanuys/scamper') v{{version}}] made by #[a(href='https://juanuys.com') Juan Uys]
 </template>
 
 <script lang="ts">
 import Vue from "vue"
 import data from "./data.json"
 import pug from "pug"
+import pkg from "../package.json"
 
 export default Vue.extend({
     data() {
         return {
-            showAll: false,
-            showColophon: false
+            showColophon: false,
+            version: pkg.version
         }
     },
     computed: {
@@ -61,6 +61,12 @@ export default Vue.extend({
         altTitle: function () {
             return data[this.prompt].alt
         }
+    },
+    methods: {
+        reload: function () {
+            location.reload()
+            return false
+        }
     }
 })
 </script>
@@ -81,14 +87,19 @@ h1 > span {
 div.scamper {
     background-color: lightblue;
     padding: 15px;
+    margin-bottom: 60px;
 }
 .container > h1 {
     font-size: 1.3em;
 }
-.action {
-    background-color: lightcoral;
-    color: rebeccapurple;
+div.action {
+    cursor: pointer;
+}
+span.action {
+    background-color: lighten($color: olive, $amount: 15);
+    color: darkolivegreen;
     padding: 8px;
+    margin-right: 8px;
 }
 p.smaller {
     font-size: smaller;
@@ -98,24 +109,11 @@ p.guide {
     color: darkolivegreen;
     padding: 8px;
 }
-ul.all {
-    font-size: smaller;
-}
-button {
-    border: 0;
-    background: none;
-    box-shadow: none;
-    border-radius: 0px;
-    background-color: lightgrey;
-    padding: 8px;
-}
-button::after {
-    content: ' >>'
-}
 div.colophon h1 {
     cursor: pointer;
     font-size: smaller;
     color: darkgray;
+    text-decoration: underline;
 }
 div.colophon {
     position: absolute;
